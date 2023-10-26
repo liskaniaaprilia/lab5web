@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Validasi Form</title>
+  <style>
+    .error {
+      color: red;
+    }
+    
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #b3ebfc;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 100px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 50px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px #ccc;
+    }
+
+    h2 {
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #333;
+    }
+
+    input[type="text"], textarea {
+      width: 70%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .error {
+      color: red;
+      font-size: 14px;
+    }
+
+    input[type="submit"] {
+      background-color: #ffffff;
+      color: #070707;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+  <h2>Formulir Validasi</h2>
+  <form id="myForm" action="proses.php" method="post">
+    <label for="nama">Nama:</label>
+    <input type="text" id="nama" name="nama">
+    <span class="error" id="namaError"></span><br><br>
+
+    <label for="email">Email:</label>
+    <input type="text" id="email" name="email">
+    <span class="error" id="emailError"></span><br><br>
+
+    <label for="pesan">Pesan:</label>
+    <textarea id="pesan" name="pesan" rows="4" cols="50"></textarea>
+    <span class="error" id="pesanError"></span><br><br>
+
+    <input type="submit" value="Submit">
+  </form>
+
+  <script>
+    // Fungsi untuk memvalidasi form
+    function validateForm() {
+      let nama = document.getElementById("nama").value;
+      let email = document.getElementById("email").value;
+      let pesan = document.getElementById("pesan").value;
+
+      let namaError = document.getElementById("namaError");
+      let emailError = document.getElementById("emailError");
+      let pesanError = document.getElementById("pesanError");
+
+      let valid = true;
+
+      // Validasi Nama
+      if (nama === "") {
+        namaError.textContent = "Nama harus diisi";
+        valid = false;
+      } else {
+        namaError.textContent = "";
+      }
+
+      // Validasi Email
+      if (email === "") {
+        emailError.textContent = "Email harus diisi";
+        valid = false;
+      } else {
+        emailError.textContent = "";
+      }
+
+      // Validasi Pesan
+      if (pesan === "") {
+        pesanError.textContent = "Pesan harus diisi";
+        valid = false;
+      } else {
+        pesanError.textContent = "";
+      }
+
+      return valid;
+    }
+
+    // Event listener untuk mengirim form setelah validasi
+    document.getElementById("myForm").addEventListener("submit", function(event) {
+      if (!validateForm()) {
+        event.preventDefault(); // Menghentikan pengiriman form jika validasi gagal
+      }
+    });
+  </script>
+</body>
+</html>
